@@ -1,8 +1,14 @@
 public class Collections {
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
+
+        System.out.println();
 
         Collections.timeWorkArrayList(1000000);
+
+        System.out.println();
+
+        Collections.timeWorLinkedList(1000000);
 
     }
 
@@ -33,6 +39,35 @@ public class Collections {
         System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
         System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
         System.out.println("time work ArrayList - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
+    }
+
+    public static void timeWorLinkedList(int countElements){
+
+        long start, finish, timeAdd = 0, timeRemove = 0;
+
+        LinkedList<TestClass> linkedList = new LinkedList<>();
+
+        //add linkedList
+        for (int i = 0; i < countElements; i++) {
+            TestClass testClass = new TestClass(i, i, ""+i);
+            start = System.nanoTime();
+            linkedList.add(testClass);
+            finish = System.nanoTime();
+            timeAdd += finish - start;
+        }
+
+        //remove linkedList
+        for (int i = 0; i < countElements; i++) {
+            start = System.nanoTime();
+            linkedList.remove(0);
+            finish = System.nanoTime();
+            timeRemove += finish - start;
+        }
+
+        System.out.println("LinkedList:");
+        System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
+        System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
+        System.out.println("time work LinkedList - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
     }
 
 }
