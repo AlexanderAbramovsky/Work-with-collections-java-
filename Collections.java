@@ -10,6 +10,10 @@ public class Collections {
 
         Collections.timeWorLinkedList(1000000);
 
+        System.out.println();
+
+        Collections.timeWorTreeSet(1000000);
+
     }
 
     public static void timeWorkArrayList(int countElements){
@@ -68,6 +72,36 @@ public class Collections {
         System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
         System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
         System.out.println("time work LinkedList - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
+    }
+
+    public static void timeWorTreeSet(int countElements){
+
+        long start, finish, timeAdd = 0, timeRemove = 0;
+
+        TreeSet<TestClass> treeSet = new TreeSet<TestClass>();
+
+        //add treeSet
+        for (int i = 0; i < countElements; i++) {
+            TestClass testClass = new TestClass(i, i, ""+i);
+            start = System.nanoTime();
+            treeSet.add(testClass);
+            finish = System.nanoTime();
+            timeAdd += finish - start;
+        }
+
+        //remove treeSet
+        for (int i = 0; i < countElements; i++) {
+            start = System.nanoTime();
+            TestClass testClass = new TestClass(i, i, ""+i);
+            treeSet.remove(testClass);
+            finish = System.nanoTime();
+            timeRemove += finish - start;
+        }
+
+        System.out.println("TreeSet:");
+        System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
+        System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
+        System.out.println("time work TreeSet - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
     }
 
 }
