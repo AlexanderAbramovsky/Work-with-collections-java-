@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.TreeSet;
+
 public class Collections {
 
     public static void main(String[] args) {
