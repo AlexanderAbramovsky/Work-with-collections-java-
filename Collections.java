@@ -12,12 +12,15 @@ public class Collections {
 
         System.out.println();
 
-        Collections.timeWorLinkedList(1000000);
+        Collections.timeWorkLinkedList(1000000);
 
         System.out.println();
 
-        Collections.timeWorTreeSet(1000000);
+        Collections.timeWorkTreeSet(1000000);
 
+        System.out.println();
+
+        Collections.timeWorkHashMap(1000000);
     }
 
     public static void timeWorkArrayList(int countElements){
@@ -49,7 +52,7 @@ public class Collections {
         System.out.println("time work ArrayList - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
     }
 
-    public static void timeWorLinkedList(int countElements){
+    public static void timeWorkLinkedList(int countElements){
 
         long start, finish, timeAdd = 0, timeRemove = 0;
 
@@ -78,7 +81,7 @@ public class Collections {
         System.out.println("time work LinkedList - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
     }
 
-    public static void timeWorTreeSet(int countElements){
+    public static void timeWorkTreeSet(int countElements){
 
         long start, finish, timeAdd = 0, timeRemove = 0;
 
@@ -106,6 +109,36 @@ public class Collections {
         System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
         System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
         System.out.println("time work TreeSet - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
+    }
+
+    public static void timeWorkHashMap(int count){
+
+        long start, finish, timeAdd = 0, timeRemove = 0;
+
+        HashMap<Integer, TestClass> hashMap = new HashMap<>();
+
+        // add hashMap
+        for (int i = 0; i < count; i++) {
+            TestClass testClass = new TestClass(i, i, ""+i);
+            start = System.nanoTime();
+            hashMap.put(i, testClass);
+            finish = System.nanoTime();
+            timeAdd += finish - start;
+        }
+
+        // remove hashMap
+        for (int i = 0; i < count; i++) {
+            start = System.nanoTime();
+            hashMap.remove(i);
+            finish = System.nanoTime();
+            timeRemove += finish - start;
+        }
+
+        System.out.println("HashMap:");
+        System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
+        System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
+        System.out.println("time work HashMap - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
+
     }
 
 }
