@@ -25,6 +25,11 @@ public class Collections {
         System.out.println();
 
         Collections.timeWorkLinkedHashMap(1_000_000);
+
+        System.out.println();
+
+        Collections.timeWorkTreeMap(1_000_000);
+        
     }
 
     public static void timeWorkArrayList(int countElements){
@@ -172,6 +177,36 @@ public class Collections {
         System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
         System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
         System.out.println("time work LinkedHashMap - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
+
+    }
+
+    public static void timeWorkTreeMap(int countElements){
+
+        long start, finish, timeAdd = 0, timeRemove = 0;
+
+        TreeMap<Integer, TestClass> treeMap = new TreeMap<>();
+
+        //add treeMap
+        for (int i = 0; i < countElements; i++) {
+            TestClass testClass = new TestClass(i, i, "" + i);
+            start = System.nanoTime();
+            treeMap.put(i, testClass);
+            finish = System.nanoTime();
+            timeAdd += finish - start;
+        }
+
+        // remove treeMap
+        for (int i = 0; i < countElements; i++) {
+            start = System.nanoTime();
+            treeMap.remove(i);
+            finish = System.nanoTime();
+            timeRemove += finish - start;
+        }
+
+        System.out.println("TreeMap:");
+        System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
+        System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
+        System.out.println("time work TreeMap - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
 
     }
 
