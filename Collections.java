@@ -8,19 +8,23 @@ public class Collections {
 
         System.out.println();
 
-        Collections.timeWorkArrayList(1000000);
+        Collections.timeWorkArrayList(1_000_000);
 
         System.out.println();
 
-        Collections.timeWorkLinkedList(1000000);
+        Collections.timeWorkLinkedList(1_000_000);
 
         System.out.println();
 
-        Collections.timeWorkTreeSet(1000000);
+        Collections.timeWorkTreeSet(1_000_000);
 
         System.out.println();
 
-        Collections.timeWorkHashMap(1000000);
+        Collections.timeWorkHashMap(1_000_000);
+
+        System.out.println();
+
+        Collections.timeWorkLinkedHashMap(1_000_000);
     }
 
     public static void timeWorkArrayList(int countElements){
@@ -138,6 +142,36 @@ public class Collections {
         System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
         System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
         System.out.println("time work HashMap - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
+
+    }
+
+    public static void timeWorkLinkedHashMap(int countElements){
+
+        long start, finish, timeAdd = 0, timeRemove = 0;
+
+        LinkedHashMap<Integer, TestClass> linkedHashMap = new LinkedHashMap<>();
+
+        //add linkedHashMap
+        for (int i = 0; i < countElements; i++) {
+            TestClass testClass = new TestClass(i, i, "" + i);
+            start = System.nanoTime();
+            linkedHashMap.put(i, testClass);
+            finish = System.nanoTime();
+            timeAdd += finish - start;
+        }
+
+        // remove linkedHashMap
+        for (int i = 0; i < countElements; i++) {
+            start = System.nanoTime();
+            linkedHashMap.remove(i);
+            finish = System.nanoTime();
+            timeRemove += finish - start;
+        }
+
+        System.out.println("LinkedHashMap:");
+        System.out.println("time add - " + String.format("%,5d",timeAdd) + " ns");
+        System.out.println("time remove - " + String.format("%,5d",timeRemove) + " ns");
+        System.out.println("time work LinkedHashMap - " +  String.format("%,5d",timeAdd + timeRemove) + " ns");
 
     }
 
